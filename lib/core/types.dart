@@ -183,4 +183,3 @@ String getInitials(String name) {
   }
   return trimmed.substring(0, trimmed.length >= 2 ? 2 : 1).toUpperCase();
 }
-

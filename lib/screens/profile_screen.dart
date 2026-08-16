@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../types.dart';
+import '../core/types.dart';
 
 class ProfileScreen extends StatefulWidget {
   final Role role;
@@ -41,28 +41,49 @@ class _ProfileScreenState extends State<ProfileScreen> {
       builder: (context) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
         backgroundColor: isDark ? const Color(0xFF201B3E) : Colors.white,
-        title: Text("Edit Profile", style: TextStyle(fontWeight: FontWeight.bold, color: isDark ? Colors.white : const Color(0xFF1E1B4B))),
+        title: Text(
+          "Edit Profile",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: isDark ? Colors.white : const Color(0xFF1E1B4B),
+          ),
+        ),
         content: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
-                style: TextStyle(color: isDark ? Colors.white : const Color(0xFF1E1B4B)),
-                decoration: InputDecoration(labelText: "Full name", labelStyle: TextStyle(color: isDark ? const Color(0xFFA0AEC0) : null)),
+                style: TextStyle(
+                    color: isDark ? Colors.white : const Color(0xFF1E1B4B)),
+                decoration: InputDecoration(
+                  labelText: "Full name",
+                  labelStyle:
+                      TextStyle(color: isDark ? const Color(0xFFA0AEC0) : null),
+                ),
                 controller: TextEditingController(text: _displayName),
                 onChanged: (v) => _displayName = v,
               ),
               const SizedBox(height: 8),
               TextField(
-                style: TextStyle(color: isDark ? Colors.white : const Color(0xFF1E1B4B)),
-                decoration: InputDecoration(labelText: "Phone", labelStyle: TextStyle(color: isDark ? const Color(0xFFA0AEC0) : null)),
+                style: TextStyle(
+                    color: isDark ? Colors.white : const Color(0xFF1E1B4B)),
+                decoration: InputDecoration(
+                  labelText: "Phone",
+                  labelStyle:
+                      TextStyle(color: isDark ? const Color(0xFFA0AEC0) : null),
+                ),
                 controller: TextEditingController(text: _phone),
                 onChanged: (v) => _phone = v,
               ),
               const SizedBox(height: 8),
               TextField(
-                style: TextStyle(color: isDark ? Colors.white : const Color(0xFF1E1B4B)),
-                decoration: InputDecoration(labelText: "Email", labelStyle: TextStyle(color: isDark ? const Color(0xFFA0AEC0) : null)),
+                style: TextStyle(
+                    color: isDark ? Colors.white : const Color(0xFF1E1B4B)),
+                decoration: InputDecoration(
+                  labelText: "Email",
+                  labelStyle:
+                      TextStyle(color: isDark ? const Color(0xFFA0AEC0) : null),
+                ),
                 controller: TextEditingController(text: _contactEmail),
                 onChanged: (v) => _contactEmail = v,
               ),
@@ -77,7 +98,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFF5B32E8),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16)),
             ),
             onPressed: () {
               setState(() {});
@@ -108,17 +130,36 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Log out?", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: isDark ? Colors.white : const Color(0xFF1E1B4B))),
+                  Text(
+                    "Log out?",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: isDark ? Colors.white : const Color(0xFF1E1B4B),
+                    ),
+                  ),
                   InkWell(
                     onTap: () => Navigator.pop(context),
-                    child: Icon(Icons.close_rounded, size: 20, color: isDark ? const Color(0xFFA0AEC0) : const Color(0xFF8F9BBA)),
+                    child: Icon(
+                      Icons.close_rounded,
+                      size: 20,
+                      color: isDark
+                          ? const Color(0xFFA0AEC0)
+                          : const Color(0xFF8F9BBA),
+                    ),
                   ),
                 ],
               ),
               const SizedBox(height: 12),
               Text(
                 "You will be returned to the sign-in screen and your session will be cleared.",
-                style: TextStyle(fontSize: 13, color: isDark ? const Color(0xFFA0AEC0) : const Color(0xFF8F9BBA), height: 1.4),
+                style: TextStyle(
+                  fontSize: 13,
+                  color: isDark
+                      ? const Color(0xFFA0AEC0)
+                      : const Color(0xFF8F9BBA),
+                  height: 1.4,
+                ),
               ),
               const SizedBox(height: 24),
               Row(
@@ -126,26 +167,47 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 children: [
                   OutlinedButton(
                     style: OutlinedButton.styleFrom(
-                      side: BorderSide(color: isDark ? const Color(0xFF3B326B) : const Color(0xFFE4E0FF)),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                      side: BorderSide(
+                        color: isDark
+                            ? const Color(0xFF3B326B)
+                            : const Color(0xFFE4E0FF),
+                      ),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(14)),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 12),
                     ),
                     onPressed: () => Navigator.pop(context),
-                    child: Text("Cancel", style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: isDark ? Colors.white : const Color(0xFF1E1B4B))),
+                    child: Text(
+                      "Cancel",
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                        color: isDark ? Colors.white : const Color(0xFF1E1B4B),
+                      ),
+                    ),
                   ),
                   const SizedBox(width: 10),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFFE5103B),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(14)),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 12),
                       elevation: 0,
                     ),
                     onPressed: () {
                       Navigator.pop(context);
                       widget.onLogout();
                     },
-                    child: const Text("Log out", style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Colors.white)),
+                    child: const Text(
+                      "Log out",
+                      style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
                   ),
                 ],
               ),
@@ -168,77 +230,90 @@ class _ProfileScreenState extends State<ProfileScreen> {
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
         colors: isDark
-            ? [const Color(0xFF14112A), const Color(0xFF191535), const Color(0xFF211A42)]
-            : [const Color(0xFFE4E0FF), const Color(0xFFEFE8FF), const Color(0xFFFAE8F4)],
+            ? [
+                const Color(0xFF14112A),
+                const Color(0xFF191535),
+                const Color(0xFF211A42)
+              ]
+            : [
+                const Color(0xFFE4E0FF),
+                const Color(0xFFEFE8FF),
+                const Color(0xFFFAE8F4)
+              ],
       ),
     );
 
     final cardColor = isDark ? const Color(0xFF201B3E) : Colors.white;
     final titleColor = isDark ? Colors.white : const Color(0xFF1E1B4B);
-    final subtitleColor = isDark ? const Color(0xFFA0AEC0) : const Color(0xFF8F9BBA);
-    final pillBgColor = isDark ? const Color(0xFF2E2657) : const Color(0xFFF0EEFF);
-    final dividerColor = isDark ? const Color(0xFF2F2853) : Colors.grey.shade100;
+    final subtitleColor =
+        isDark ? const Color(0xFFA0AEC0) : const Color(0xFF8F9BBA);
+    final pillBgColor =
+        isDark ? const Color(0xFF2E2657) : const Color(0xFFF0EEFF);
+    final dividerColor =
+        isDark ? const Color(0xFF2F2853) : Colors.grey.shade100;
 
     return Container(
       decoration: gradientDecoration,
       child: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          // 1. User Profile Card
           Card(
             elevation: 0,
             color: cardColor,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 28, horizontal: 20),
               child: Column(
                 children: [
-                  // Centered Large Circle Avatar
                   CircleAvatar(
                     radius: 44,
                     backgroundColor: const Color(0xFF5B32E8),
                     child: Text(
                       initials,
-                      style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white),
+                      style: const TextStyle(
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
                     ),
                   ),
                   const SizedBox(height: 14),
-
-                  // Display Name
                   Text(
                     _displayName,
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: titleColor),
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: titleColor),
                   ),
                   const SizedBox(height: 3),
-
-                  // Contact Email
                   Text(
                     _contactEmail,
                     style: TextStyle(fontSize: 12, color: subtitleColor),
                   ),
                   const SizedBox(height: 12),
-
-                  // Role Badge Pill
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
                     decoration: BoxDecoration(
                       color: pillBgColor,
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Text(
                       roleLabels[widget.role]!,
-                      style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xFF8B5BF6)),
+                      style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF8B5BF6)),
                     ),
                   ),
                   const SizedBox(height: 14),
-
-                  // Pencil Edit Icon Button
                   InkWell(
                     onTap: () => _showEditDialog(isDark),
                     borderRadius: BorderRadius.circular(20),
                     child: Padding(
                       padding: const EdgeInsets.all(6),
-                      child: Icon(Icons.edit_outlined, color: subtitleColor, size: 20),
+                      child: Icon(Icons.edit_outlined,
+                          color: subtitleColor, size: 20),
                     ),
                   ),
                 ],
@@ -246,27 +321,42 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
           const SizedBox(height: 16),
-
-          // 2. Options Menu List Card
           Card(
             elevation: 0,
             color: cardColor,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
             child: Column(
               children: [
                 if (!isSuperAdmin) ...[
                   ListTile(
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
-                    leading: Icon(Icons.center_focus_strong, color: retrainLocked ? Colors.grey.shade600 : subtitleColor),
+                    contentPadding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+                    leading: Icon(
+                      Icons.center_focus_strong,
+                      color:
+                          retrainLocked ? Colors.grey.shade600 : subtitleColor,
+                    ),
                     title: Text(
                       "Retrain Face Data",
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: retrainLocked ? Colors.grey.shade600 : titleColor),
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color:
+                            retrainLocked ? Colors.grey.shade600 : titleColor,
+                      ),
                     ),
-                    trailing: retrainLocked ? const Icon(Icons.lock_outline, size: 16, color: Colors.grey) : Icon(Icons.chevron_right_rounded, size: 18, color: subtitleColor),
+                    trailing: retrainLocked
+                        ? const Icon(Icons.lock_outline,
+                            size: 16, color: Colors.grey)
+                        : Icon(Icons.chevron_right_rounded,
+                            size: 18, color: subtitleColor),
                     onTap: () {
                       if (retrainLocked) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text("Retraining is locked until SuperAdmin authorizes it.")),
+                          const SnackBar(
+                              content: Text(
+                                  "Retraining is locked until SuperAdmin authorizes it.")),
                         );
                       } else {
                         widget.onNavigate(ScreenKey.faceCapture);
@@ -275,39 +365,55 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   Divider(height: 1, color: dividerColor),
                 ],
-
                 ListTile(
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+                  contentPadding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
                   leading: Icon(Icons.settings_outlined, color: subtitleColor),
-                  title: Text("Settings", style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: titleColor)),
-                  trailing: Icon(Icons.chevron_right_rounded, size: 18, color: subtitleColor),
+                  title: Text("Settings",
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: titleColor)),
+                  trailing: Icon(Icons.chevron_right_rounded,
+                      size: 18, color: subtitleColor),
                   onTap: () => widget.onNavigate(ScreenKey.settings),
                 ),
                 Divider(height: 1, color: dividerColor),
-
                 if (isSuperAdmin) ...[
                   ListTile(
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
-                    leading: Icon(Icons.sd_storage_outlined, color: subtitleColor),
-                    title: Text("Backup & Restore", style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: titleColor)),
-                    trailing: Icon(Icons.chevron_right_rounded, size: 18, color: subtitleColor),
+                    contentPadding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+                    leading:
+                        Icon(Icons.sd_storage_outlined, color: subtitleColor),
+                    title: Text("Backup & Restore",
+                        style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: titleColor)),
+                    trailing: Icon(Icons.chevron_right_rounded,
+                        size: 18, color: subtitleColor),
                     onTap: () => widget.onNavigate(ScreenKey.backup),
                   ),
                   Divider(height: 1, color: dividerColor),
                 ],
-
                 ListTile(
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
-                  leading: const Icon(Icons.logout_rounded, color: Color(0xFFEE5D50)),
-                  title: const Text("Logout", style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xFFEE5D50))),
-                  trailing: const Icon(Icons.chevron_right_rounded, size: 18, color: Color(0xFFEE5D50)),
+                  contentPadding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+                  leading: const Icon(Icons.logout_rounded,
+                      color: Color(0xFFEE5D50)),
+                  title: const Text("Logout",
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xFFEE5D50))),
+                  trailing: const Icon(Icons.chevron_right_rounded,
+                      size: 18, color: Color(0xFFEE5D50)),
                   onTap: () => _showLogoutModal(isDark),
                 ),
               ],
             ),
           ),
           const SizedBox(height: 16),
-
           if (!isSuperAdmin && retrainLocked)
             Text(
               "Face retraining is locked until SuperAdmin sends a retrain notification.",

@@ -26,10 +26,13 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12.0),
       decoration: BoxDecoration(
-        color: isDark ? const Color(0xFF1E1B3A) : Colors.white.withOpacity(0.95),
+        color:
+            isDark ? const Color(0xFF1E1B3A) : Colors.white.withOpacity(0.95),
         border: Border(
           bottom: BorderSide(
-            color: isDark ? Colors.white.withOpacity(0.08) : Colors.black.withOpacity(0.08),
+            color: isDark
+                ? Colors.white.withOpacity(0.08)
+                : Colors.black.withOpacity(0.08),
             width: 1.0,
           ),
         ),
@@ -46,7 +49,8 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
                   onPressed: onBack,
                   color: isDark ? Colors.white : const Color(0xFF1B2559),
                   padding: EdgeInsets.zero,
-                  constraints: const BoxConstraints(minWidth: 36, minHeight: 36),
+                  constraints:
+                      const BoxConstraints(minWidth: 36, minHeight: 36),
                 )
               else
                 const SizedBox(width: 8),

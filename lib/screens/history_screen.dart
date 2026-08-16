@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../types.dart';
-import '../mock_data.dart';
+import '../core/types.dart';
+import '../core/mock_data.dart';
 
 class HistoryScreen extends StatefulWidget {
   final Role role;
@@ -32,16 +32,21 @@ class _HistoryScreenState extends State<HistoryScreen> {
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 decoration: BoxDecoration(
-                  color: isActive ? (isDark ? const Color(0xFF2E2657) : Colors.white) : Colors.transparent,
+                  color: isActive
+                      ? (isDark ? const Color(0xFF2E2657) : Colors.white)
+                      : Colors.transparent,
                   borderRadius: BorderRadius.circular(12),
-                  boxShadow: isActive ? [const BoxShadow(color: Colors.black12, blurRadius: 4)] : [],
+                  boxShadow: isActive
+                      ? [const BoxShadow(color: Colors.black12, blurRadius: 4)]
+                      : [],
                 ),
                 child: Center(
                   child: Text(
                     tab[0].toUpperCase() + tab.substring(1),
                     style: TextStyle(
                       fontSize: 11,
-                      fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+                      fontWeight:
+                          isActive ? FontWeight.bold : FontWeight.normal,
                       color: isActive ? const Color(0xFF8B5BF6) : subtitleColor,
                     ),
                   ),
@@ -54,7 +59,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
     );
   }
 
-  Widget _buildRecordCard(AttendanceRecordItem r, Color cardColor, Color titleColor, Color subtitleColor) {
+  Widget _buildRecordCard(AttendanceRecordItem r, Color cardColor,
+      Color titleColor, Color subtitleColor) {
     Color badgeBg = const Color(0x1A05CD99);
     Color badgeColor = const Color(0xFF05CD99);
     if (r.status == "Late") {
@@ -84,12 +90,28 @@ class _HistoryScreenState extends State<HistoryScreen> {
               child: Column(
                 children: [
                   Text(
-                    ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][dt.month - 1],
+                    [
+                      "Jan",
+                      "Feb",
+                      "Mar",
+                      "Apr",
+                      "May",
+                      "Jun",
+                      "Jul",
+                      "Aug",
+                      "Sep",
+                      "Oct",
+                      "Nov",
+                      "Dec"
+                    ][dt.month - 1],
                     style: TextStyle(fontSize: 11, color: subtitleColor),
                   ),
                   Text(
                     "${dt.day}",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: titleColor),
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: titleColor),
                   ),
                 ],
               ),
@@ -101,10 +123,21 @@ class _HistoryScreenState extends State<HistoryScreen> {
                 children: [
                   Text(
                     "${r.checkIn != null ? 'In ' + r.checkIn! : '—'} · ${r.checkOut != null ? 'Out ' + r.checkOut! : '—'}",
-                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: titleColor),
+                    style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                        color: titleColor),
                   ),
                   Text(
-                    ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"][dt.weekday - 1],
+                    [
+                      "Monday",
+                      "Tuesday",
+                      "Wednesday",
+                      "Thursday",
+                      "Friday",
+                      "Saturday",
+                      "Sunday"
+                    ][dt.weekday - 1],
                     style: TextStyle(fontSize: 11, color: subtitleColor),
                   ),
                 ],
@@ -112,10 +145,14 @@ class _HistoryScreenState extends State<HistoryScreen> {
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
-              decoration: BoxDecoration(color: badgeBg, borderRadius: BorderRadius.circular(20)),
+              decoration: BoxDecoration(
+                  color: badgeBg, borderRadius: BorderRadius.circular(20)),
               child: Text(
                 r.status,
-                style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: badgeColor),
+                style: TextStyle(
+                    fontSize: 11,
+                    fontWeight: FontWeight.bold,
+                    color: badgeColor),
               ),
             ),
           ],
@@ -129,22 +166,34 @@ class _HistoryScreenState extends State<HistoryScreen> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final cardColor = isDark ? const Color(0xFF201B3E) : Colors.white;
     final titleColor = isDark ? Colors.white : const Color(0xFF1E1B4B);
-    final subtitleColor = isDark ? const Color(0xFFA0AEC0) : const Color(0xFF8F9BBA);
-    final initialBgColor = isDark ? const Color(0xFF2E2657) : const Color(0xFFF0EEFF);
+    final subtitleColor =
+        isDark ? const Color(0xFFA0AEC0) : const Color(0xFF8F9BBA);
+    final initialBgColor =
+        isDark ? const Color(0xFF2E2657) : const Color(0xFFF0EEFF);
 
     final gradientDecoration = BoxDecoration(
       gradient: LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
         colors: isDark
-            ? [const Color(0xFF14112A), const Color(0xFF191535), const Color(0xFF211A42)]
-            : [const Color(0xFFE4E0FF), const Color(0xFFEFE8FF), const Color(0xFFFAE8F4)],
+            ? [
+                const Color(0xFF14112A),
+                const Color(0xFF191535),
+                const Color(0xFF211A42)
+              ]
+            : [
+                const Color(0xFFE4E0FF),
+                const Color(0xFFEFE8FF),
+                const Color(0xFFFAE8F4)
+              ],
       ),
     );
 
     // SuperAdmin Level 3: User Records
     if (widget.role == Role.superAdmin && _selectedUser != null) {
-      final items = _selectedUser!.records.where((r) => _filter == "all" || r.status.toLowerCase() == _filter).toList();
+      final items = _selectedUser!.records
+          .where((r) => _filter == "all" || r.status.toLowerCase() == _filter)
+          .toList();
 
       return Container(
         decoration: gradientDecoration,
@@ -153,28 +202,37 @@ class _HistoryScreenState extends State<HistoryScreen> {
           children: [
             TextButton.icon(
               icon: const Icon(Icons.chevron_left, size: 18),
-              label: Text("Back to ${_selectedUser!.role}s", style: const TextStyle(color: Color(0xFF8B5BF6))),
+              label: Text("Back to ${_selectedUser!.role}s",
+                  style: const TextStyle(color: Color(0xFF8B5BF6))),
               onPressed: () => setState(() => _selectedUser = null),
             ),
             Card(
               elevation: 0,
               color: cardColor,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(24)),
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Row(
                   children: [
                     CircleAvatar(
                       backgroundColor: const Color(0xFF5B32E8),
-                      child: Text(getInitials(_selectedUser!.user), style: const TextStyle(color: Colors.white)),
+                      child: Text(getInitials(_selectedUser!.user),
+                          style: const TextStyle(color: Colors.white)),
                     ),
                     const SizedBox(width: 12),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(_selectedUser!.user, style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: titleColor)),
-                          Text("${_selectedUser!.role} · ${_selectedUser!.id}", style: TextStyle(fontSize: 11, color: subtitleColor)),
+                          Text(_selectedUser!.user,
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: titleColor)),
+                          Text("${_selectedUser!.role} · ${_selectedUser!.id}",
+                              style: TextStyle(
+                                  fontSize: 11, color: subtitleColor)),
                         ],
                       ),
                     ),
@@ -185,7 +243,10 @@ class _HistoryScreenState extends State<HistoryScreen> {
             const SizedBox(height: 12),
             _buildStatusTabs(isDark, cardColor, subtitleColor),
             const SizedBox(height: 12),
-            ...items.map((r) => _buildRecordCard(r, cardColor, titleColor, subtitleColor)).toList(),
+            ...items
+                .map((r) =>
+                    _buildRecordCard(r, cardColor, titleColor, subtitleColor))
+                .toList(),
           ],
         ),
       );
@@ -202,27 +263,44 @@ class _HistoryScreenState extends State<HistoryScreen> {
           children: [
             TextButton.icon(
               icon: const Icon(Icons.chevron_left, size: 18),
-              label: const Text("Back to stakeholders", style: TextStyle(color: Color(0xFF8B5BF6))),
+              label: const Text("Back to stakeholders",
+                  style: TextStyle(color: Color(0xFF8B5BF6))),
               onPressed: () => setState(() => _selectedRole = null),
             ),
-            Text("$_selectedRole (${users.length})", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: titleColor)),
+            Text("$_selectedRole (${users.length})",
+                style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: titleColor)),
             const SizedBox(height: 12),
             ...users.map((u) {
-              final presentCount = u.records.where((r) => r.status == "Present").length;
+              final presentCount =
+                  u.records.where((r) => r.status == "Present").length;
               return Card(
                 elevation: 0,
                 color: cardColor,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(24)),
                 margin: const EdgeInsets.only(bottom: 10),
                 child: ListTile(
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                  contentPadding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                   leading: CircleAvatar(
                     backgroundColor: const Color(0xFF5B32E8),
-                    child: Text(getInitials(u.user), style: const TextStyle(color: Colors.white, fontSize: 12)),
+                    child: Text(getInitials(u.user),
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 12)),
                   ),
-                  title: Text(u.user, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: titleColor)),
-                  subtitle: Text("${u.id} · $presentCount/${u.records.length} present", style: TextStyle(fontSize: 11, color: subtitleColor)),
-                  trailing: Icon(Icons.chevron_right, size: 18, color: subtitleColor),
+                  title: Text(u.user,
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: titleColor)),
+                  subtitle: Text(
+                      "${u.id} · $presentCount/${u.records.length} present",
+                      style: TextStyle(fontSize: 11, color: subtitleColor)),
+                  trailing:
+                      Icon(Icons.chevron_right, size: 18, color: subtitleColor),
                   onTap: () => setState(() => _selectedUser = u),
                 ),
               );
@@ -241,20 +319,23 @@ class _HistoryScreenState extends State<HistoryScreen> {
           children: [
             Padding(
               padding: const EdgeInsets.only(bottom: 12),
-              child: Text("Viewing as SuperAdmin · choose a stakeholder", style: TextStyle(fontSize: 11, color: subtitleColor)),
+              child: Text("Viewing as SuperAdmin · choose a stakeholder",
+                  style: TextStyle(fontSize: 11, color: subtitleColor)),
             ),
             ...stakeholderRoles.map((r) {
               final users = usersByRoleData[r] ?? [];
               return Card(
                 elevation: 0,
                 color: cardColor,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(28)),
                 margin: const EdgeInsets.only(bottom: 16),
                 child: InkWell(
                   onTap: () => setState(() => _selectedRole = r),
                   borderRadius: BorderRadius.circular(28),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 24, horizontal: 16),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -270,7 +351,10 @@ class _HistoryScreenState extends State<HistoryScreen> {
                           child: Center(
                             child: Text(
                               getInitials(r),
-                              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF8B5BF6)),
+                              style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFF8B5BF6)),
                             ),
                           ),
                         ),
@@ -279,7 +363,10 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         // Role Title
                         Text(
                           r,
-                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: titleColor),
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: titleColor),
                         ),
                         const SizedBox(height: 2),
 
@@ -291,7 +378,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         const SizedBox(height: 14),
 
                         // Centered Chevron Indicator
-                        Icon(Icons.chevron_right_rounded, size: 20, color: subtitleColor),
+                        Icon(Icons.chevron_right_rounded,
+                            size: 20, color: subtitleColor),
                       ],
                     ),
                   ),
@@ -304,7 +392,9 @@ class _HistoryScreenState extends State<HistoryScreen> {
     }
 
     // Regular User History
-    final items = mockHistoryData.where((r) => _filter == "all" || r.status.toLowerCase() == _filter).toList();
+    final items = mockHistoryData
+        .where((r) => _filter == "all" || r.status.toLowerCase() == _filter)
+        .toList();
 
     return Container(
       decoration: gradientDecoration,
@@ -313,7 +403,10 @@ class _HistoryScreenState extends State<HistoryScreen> {
         children: [
           _buildStatusTabs(isDark, cardColor, subtitleColor),
           const SizedBox(height: 14),
-          ...items.map((r) => _buildRecordCard(r, cardColor, titleColor, subtitleColor)).toList(),
+          ...items
+              .map((r) =>
+                  _buildRecordCard(r, cardColor, titleColor, subtitleColor))
+              .toList(),
         ],
       ),
     );

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../mock_data.dart';
+import '../core/mock_data.dart';
 
 class ReportsScreen extends StatefulWidget {
   const ReportsScreen({Key? key}) : super(key: key);
@@ -24,18 +24,30 @@ class _ReportsScreenState extends State<ReportsScreen> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final cardColor = isDark ? const Color(0xFF201B3E) : Colors.white;
     final titleColor = isDark ? Colors.white : const Color(0xFF1E1B4B);
-    final subtitleColor = isDark ? const Color(0xFFA0AEC0) : const Color(0xFF8F9BBA);
-    final inputBgColor = isDark ? const Color(0xFF2E2657) : const Color(0xFFF0EEFF);
-    final pillBgColor = isDark ? const Color(0xFF2E2657) : const Color(0xFFF7F5FF);
-    final pillBorderColor = isDark ? const Color(0xFF3B326B) : const Color(0xFFE4E0FF);
+    final subtitleColor =
+        isDark ? const Color(0xFFA0AEC0) : const Color(0xFF8F9BBA);
+    final inputBgColor =
+        isDark ? const Color(0xFF2E2657) : const Color(0xFFF0EEFF);
+    final pillBgColor =
+        isDark ? const Color(0xFF2E2657) : const Color(0xFFF7F5FF);
+    final pillBorderColor =
+        isDark ? const Color(0xFF3B326B) : const Color(0xFFE4E0FF);
 
     final gradientDecoration = BoxDecoration(
       gradient: LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
         colors: isDark
-            ? [const Color(0xFF14112A), const Color(0xFF191535), const Color(0xFF211A42)]
-            : [const Color(0xFFE4E0FF), const Color(0xFFEFE8FF), const Color(0xFFFAE8F4)],
+            ? [
+                const Color(0xFF14112A),
+                const Color(0xFF191535),
+                const Color(0xFF211A42)
+              ]
+            : [
+                const Color(0xFFE4E0FF),
+                const Color(0xFFEFE8FF),
+                const Color(0xFFFAE8F4)
+              ],
       ),
     );
 
@@ -44,21 +56,27 @@ class _ReportsScreenState extends State<ReportsScreen> {
       child: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          // 1. Generate Report Card
           Card(
             elevation: 0,
             color: cardColor,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
             child: Padding(
               padding: const EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Generate Report", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: titleColor)),
+                  Text("Generate Report",
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: titleColor)),
                   const SizedBox(height: 16),
-
-                  // Scope Label & Soft Pill Dropdown
-                  Text("Scope", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: titleColor)),
+                  Text("Scope",
+                      style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: titleColor)),
                   const SizedBox(height: 6),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -70,42 +88,58 @@ class _ReportsScreenState extends State<ReportsScreen> {
                       child: DropdownButton<String>(
                         value: _scope,
                         isExpanded: true,
-                        icon: Icon(Icons.keyboard_arrow_down_rounded, color: subtitleColor),
+                        icon: Icon(Icons.keyboard_arrow_down_rounded,
+                            color: subtitleColor),
                         dropdownColor: cardColor,
-                        style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: titleColor),
+                        style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                            color: titleColor),
                         items: const [
-                          DropdownMenuItem(value: "class", child: Text("My Class")),
-                          DropdownMenuItem(value: "department", child: Text("Department")),
-                          DropdownMenuItem(value: "individual", child: Text("Individual Student")),
+                          DropdownMenuItem(
+                              value: "class", child: Text("My Class")),
+                          DropdownMenuItem(
+                              value: "department", child: Text("Department")),
+                          DropdownMenuItem(
+                              value: "individual",
+                              child: Text("Individual Student")),
                         ],
                         onChanged: (v) => setState(() => _scope = v ?? "class"),
                       ),
                     ),
                   ),
                   const SizedBox(height: 14),
-
-                  // From / To Date Fields Side-by-Side
                   Row(
                     children: [
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("From", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: titleColor)),
+                            Text("From",
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                    color: titleColor)),
                             const SizedBox(height: 6),
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 2),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 14, vertical: 2),
                               decoration: BoxDecoration(
                                 color: inputBgColor,
                                 borderRadius: BorderRadius.circular(18),
                               ),
                               child: TextField(
                                 controller: _fromController,
-                                style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: titleColor),
+                                style: TextStyle(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w600,
+                                    color: titleColor),
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
-                                  suffixIcon: Icon(Icons.calendar_today_rounded, size: 16, color: subtitleColor),
-                                  suffixIconConstraints: const BoxConstraints(minWidth: 20),
+                                  suffixIcon: Icon(Icons.calendar_today_rounded,
+                                      size: 16, color: subtitleColor),
+                                  suffixIconConstraints:
+                                      const BoxConstraints(minWidth: 20),
                                 ),
                               ),
                             ),
@@ -117,21 +151,31 @@ class _ReportsScreenState extends State<ReportsScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("To", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: titleColor)),
+                            Text("To",
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                    color: titleColor)),
                             const SizedBox(height: 6),
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 2),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 14, vertical: 2),
                               decoration: BoxDecoration(
                                 color: inputBgColor,
                                 borderRadius: BorderRadius.circular(18),
                               ),
                               child: TextField(
                                 controller: _toController,
-                                style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: titleColor),
+                                style: TextStyle(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w600,
+                                    color: titleColor),
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
-                                  suffixIcon: Icon(Icons.calendar_today_rounded, size: 16, color: subtitleColor),
-                                  suffixIconConstraints: const BoxConstraints(minWidth: 20),
+                                  suffixIcon: Icon(Icons.calendar_today_rounded,
+                                      size: 16, color: subtitleColor),
+                                  suffixIconConstraints:
+                                      const BoxConstraints(minWidth: 20),
                                 ),
                               ),
                             ),
@@ -141,8 +185,6 @@ class _ReportsScreenState extends State<ReportsScreen> {
                     ],
                   ),
                   const SizedBox(height: 18),
-
-                  // Preview Chart Box
                   Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
@@ -153,7 +195,9 @@ class _ReportsScreenState extends State<ReportsScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Preview — % present", style: TextStyle(fontSize: 12, color: subtitleColor)),
+                        Text("Preview — % present",
+                            style:
+                                TextStyle(fontSize: 12, color: subtitleColor)),
                         const SizedBox(height: 16),
                         SizedBox(
                           height: 90,
@@ -174,7 +218,10 @@ class _ReportsScreenState extends State<ReportsScreen> {
                                       ),
                                     ),
                                     const SizedBox(height: 6),
-                                    Text(d["day"].toString(), style: TextStyle(fontSize: 10, color: subtitleColor)),
+                                    Text(d["day"].toString(),
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            color: subtitleColor)),
                                   ],
                                 ),
                               );
@@ -185,8 +232,6 @@ class _ReportsScreenState extends State<ReportsScreen> {
                     ),
                   ),
                   const SizedBox(height: 18),
-
-                  // Export Action Pill Buttons Row
                   Row(
                     children: [
                       Expanded(
@@ -203,9 +248,14 @@ class _ReportsScreenState extends State<ReportsScreen> {
                             child: const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(Icons.picture_as_pdf_outlined, size: 18, color: Color(0xFF8B5BF6)),
+                                Icon(Icons.picture_as_pdf_outlined,
+                                    size: 18, color: Color(0xFF8B5BF6)),
                                 SizedBox(width: 8),
-                                Text("PDF", style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Color(0xFF8B5BF6))),
+                                Text("PDF",
+                                    style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.bold,
+                                        color: Color(0xFF8B5BF6))),
                               ],
                             ),
                           ),
@@ -226,9 +276,14 @@ class _ReportsScreenState extends State<ReportsScreen> {
                             child: const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(Icons.table_chart_outlined, size: 18, color: Color(0xFF8B5BF6)),
+                                Icon(Icons.table_chart_outlined,
+                                    size: 18, color: Color(0xFF8B5BF6)),
                                 SizedBox(width: 8),
-                                Text("Excel", style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Color(0xFF8B5BF6))),
+                                Text("Excel",
+                                    style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.bold,
+                                        color: Color(0xFF8B5BF6))),
                               ],
                             ),
                           ),
@@ -237,7 +292,6 @@ class _ReportsScreenState extends State<ReportsScreen> {
                     ],
                   ),
                   const SizedBox(height: 12),
-
                   Center(
                     child: Text(
                       "Exports are bilingual — ខ្មែរ above, English below",
@@ -249,31 +303,47 @@ class _ReportsScreenState extends State<ReportsScreen> {
             ),
           ),
           const SizedBox(height: 16),
-
-          // 2. Recent Exports Card
           Card(
             elevation: 0,
             color: cardColor,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
             child: Padding(
               padding: const EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Recent Exports", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: titleColor)),
+                  Text("Recent Exports",
+                      style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: titleColor)),
                   const SizedBox(height: 10),
-                  ...["attendance_may_2026.pdf", "class_4B_weekly.xlsx", "absences_q2.pdf"].map((f) {
+                  ...[
+                    "attendance_may_2026.pdf",
+                    "class_4B_weekly.xlsx",
+                    "absences_q2.pdf"
+                  ].map((f) {
                     return Column(
                       children: [
                         ListTile(
                           contentPadding: EdgeInsets.zero,
-                          title: Text(f, style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: titleColor)),
+                          title: Text(f,
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w500,
+                                  color: titleColor)),
                           trailing: IconButton(
-                            icon: const Icon(Icons.download_rounded, size: 20, color: Color(0xFF8B5BF6)),
+                            icon: const Icon(Icons.download_rounded,
+                                size: 20, color: Color(0xFF8B5BF6)),
                             onPressed: () => _exportFile("Download"),
                           ),
                         ),
-                        Divider(height: 1, color: isDark ? const Color(0xFF2F2853) : Colors.grey.shade100),
+                        Divider(
+                            height: 1,
+                            color: isDark
+                                ? const Color(0xFF2F2853)
+                                : Colors.grey.shade100),
                       ],
                     );
                   }).toList(),

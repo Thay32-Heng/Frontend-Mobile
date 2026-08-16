@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import '../types.dart';
+import '../core/types.dart';
 
 Role roleFromEmail(String email) {
   final local = email.split('@')[0].toLowerCase();
   if (local.contains("admin")) return Role.superAdmin;
-  if (local.contains("head") || local.contains("hod")) return Role.headOfDepartment;
+  if (local.contains("head") || local.contains("hod"))
+    return Role.headOfDepartment;
   if (local.contains("lecturer") || local == "dara") return Role.lecturer;
   if (local.contains("monitor") || local == "manit") return Role.classMonitor;
   if (local.contains("assistant") || local == "dalin") return Role.assistant;
@@ -144,17 +145,20 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     // Email Field
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 14, vertical: 4),
                       decoration: BoxDecoration(
                         color: const Color(0xFFF4F7FE),
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: TextField(
                         controller: _emailController,
-                        style: const TextStyle(fontSize: 14, color: Color(0xFF1B2559)),
+                        style: const TextStyle(
+                            fontSize: 14, color: Color(0xFF1B2559)),
                         decoration: const InputDecoration(
                           border: InputBorder.none,
-                          icon: Icon(Icons.email_outlined, size: 20, color: Color(0xFF8F9BBA)),
+                          icon: Icon(Icons.email_outlined,
+                              size: 20, color: Color(0xFF8F9BBA)),
                           hintText: "Email address",
                         ),
                       ),
@@ -163,7 +167,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     // Password Field
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 14, vertical: 4),
                       decoration: BoxDecoration(
                         color: const Color(0xFFF4F7FE),
                         borderRadius: BorderRadius.circular(16),
@@ -171,18 +176,23 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: TextField(
                         controller: _passwordController,
                         obscureText: !_showPass,
-                        style: const TextStyle(fontSize: 14, color: Color(0xFF1B2559)),
+                        style: const TextStyle(
+                            fontSize: 14, color: Color(0xFF1B2559)),
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          icon: const Icon(Icons.lock_outline_rounded, size: 20, color: Color(0xFF8F9BBA)),
+                          icon: const Icon(Icons.lock_outline_rounded,
+                              size: 20, color: Color(0xFF8F9BBA)),
                           hintText: "Password",
                           suffixIcon: IconButton(
                             icon: Icon(
-                              _showPass ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                              _showPass
+                                  ? Icons.visibility_off_outlined
+                                  : Icons.visibility_outlined,
                               size: 20,
                               color: const Color(0xFF8F9BBA),
                             ),
-                            onPressed: () => setState(() => _showPass = !_showPass),
+                            onPressed: () =>
+                                setState(() => _showPass = !_showPass),
                           ),
                         ),
                       ),
@@ -198,14 +208,17 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Checkbox(
                             value: _remember,
                             activeColor: const Color(0xFF4318FF),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-                            onChanged: (v) => setState(() => _remember = v ?? false),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(4)),
+                            onChanged: (v) =>
+                                setState(() => _remember = v ?? false),
                           ),
                         ),
                         const SizedBox(width: 8),
                         const Text(
                           "Keep me logged in",
-                          style: TextStyle(fontSize: 12, color: Color(0xFF8F9BBA)),
+                          style:
+                              TextStyle(fontSize: 12, color: Color(0xFF8F9BBA)),
                         ),
                       ],
                     ),
@@ -250,12 +263,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 child: const Row(
                   children: [
-                    Icon(Icons.info_outline, size: 16, color: Color(0xFF8F9BBA)),
+                    Icon(Icons.info_outline,
+                        size: 16, color: Color(0xFF8F9BBA)),
                     SizedBox(width: 8),
                     Expanded(
                       child: Text(
                         "Demo accounts: admin@school.edu, hod@school.edu, lecturer@school.edu, monitor@school.edu, student@school.edu",
-                        style: TextStyle(fontSize: 10, color: Color(0xFF8F9BBA)),
+                        style:
+                            TextStyle(fontSize: 10, color: Color(0xFF8F9BBA)),
                       ),
                     ),
                   ],
@@ -353,5 +368,6 @@ class _FaceScanSmilePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant _FaceScanSmilePainter oldDelegate) => oldDelegate.color != color;
+  bool shouldRepaint(covariant _FaceScanSmilePainter oldDelegate) =>
+      oldDelegate.color != color;
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../types.dart';
+import '../core/types.dart';
 
 class BottomNavItem {
   final ScreenKey key;
@@ -11,10 +11,20 @@ class BottomNavItem {
 
 final List<BottomNavItem> allNavItems = [
   BottomNavItem(key: ScreenKey.home, label: "Home", icon: Icons.home_rounded),
-  BottomNavItem(key: ScreenKey.history, label: "History", icon: Icons.description_rounded),
-  BottomNavItem(key: ScreenKey.mark, label: "Scan", icon: Icons.center_focus_strong_rounded),
-  BottomNavItem(key: ScreenKey.notifications, label: "Alerts", icon: Icons.notifications_rounded),
-  BottomNavItem(key: ScreenKey.profile, label: "Profile", icon: Icons.person_rounded),
+  BottomNavItem(
+      key: ScreenKey.history,
+      label: "History",
+      icon: Icons.description_rounded),
+  BottomNavItem(
+      key: ScreenKey.mark,
+      label: "Scan",
+      icon: Icons.center_focus_strong_rounded),
+  BottomNavItem(
+      key: ScreenKey.notifications,
+      label: "Alerts",
+      icon: Icons.notifications_rounded),
+  BottomNavItem(
+      key: ScreenKey.profile, label: "Profile", icon: Icons.person_rounded),
 ];
 
 class BottomNav extends StatelessWidget {
@@ -31,12 +41,15 @@ class BottomNav extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final items = allNavItems.where((i) => !(role == Role.superAdmin && i.key == ScreenKey.mark)).toList();
+    final items = allNavItems
+        .where((i) => !(role == Role.superAdmin && i.key == ScreenKey.mark))
+        .toList();
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     final navBgColor = isDark ? const Color(0xFF1F1B3E) : Colors.white;
-    final activeColor = const Color(0xFF8B5BF6);
-    final inactiveColor = isDark ? const Color(0xFFA0AEC0) : const Color(0xFF8F9BBA);
+    const activeColor = Color(0xFF8B5BF6);
+    final inactiveColor =
+        isDark ? const Color(0xFFA0AEC0) : const Color(0xFF8F9BBA);
 
     return Container(
       margin: const EdgeInsets.fromLTRB(16, 4, 16, 12),
@@ -63,10 +76,10 @@ class BottomNav extends StatelessWidget {
             final index = entry.key;
             final item = entry.value;
             final isActive = active == item.key;
-            final isCenter = index == items.length ~/ 2 && items.length % 2 != 0;
+            final isCenter =
+                index == items.length ~/ 2 && items.length % 2 != 0;
 
             if (isCenter) {
-              // Center Floating Circular Button (Matching Screenshot)
               return Expanded(
                 child: InkWell(
                   onTap: () => onChange(item.key),
@@ -79,7 +92,9 @@ class BottomNav extends StatelessWidget {
                         height: 42,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: isActive ? activeColor : activeColor.withOpacity(isDark ? 0.25 : 0.12),
+                          color: isActive
+                              ? activeColor
+                              : activeColor.withOpacity(isDark ? 0.25 : 0.12),
                         ),
                         child: Icon(
                           item.icon,
@@ -112,7 +127,8 @@ class BottomNav extends StatelessWidget {
                         item.label,
                         style: TextStyle(
                           fontSize: 10,
-                          fontWeight: isActive ? FontWeight.bold : FontWeight.w500,
+                          fontWeight:
+                              isActive ? FontWeight.bold : FontWeight.w500,
                           color: isActive ? activeColor : inactiveColor,
                         ),
                       ),

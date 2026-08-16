@@ -18,8 +18,16 @@ class PhoneFrame extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: dark
-              ? [const Color(0xFF0F0D28), const Color(0xFF14112A), const Color(0xFF1E1B3A)]
-              : [const Color(0xFFD9DCFF), const Color(0xFFE8D5FF), const Color(0xFFFFD6EA)],
+              ? [
+                  const Color(0xFF0F0D28),
+                  const Color(0xFF14112A),
+                  const Color(0xFF1E1B3A)
+                ]
+              : [
+                  const Color(0xFFD9DCFF),
+                  const Color(0xFFE8D5FF),
+                  const Color(0xFFFFD6EA)
+                ],
         ),
       ),
       child: Center(
@@ -45,7 +53,6 @@ class PhoneFrame extends StatelessWidget {
           clipBehavior: Clip.antiAlias,
           child: Column(
             children: [
-              // Phone Notch / Speaker Bar
               Container(
                 height: 28,
                 color: dark ? const Color(0xFF14112A) : Colors.white,
